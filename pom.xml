@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+
+<groupId>com.tt.net</groupId>
+<artifactId>cpool</artifactId>
+<version>1.0</version>
+
+<name>cpool</name>
+  <!-- FIXME change it to the project's website -->
+<url>http://www.example.com</url>
+
+<properties>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <maven.compiler.source>1.8</maven.compiler.source>
+  <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+
+<dependencies>
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.11</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+
+<build>
+
+  <extensions>
+    <extension>
+      <groupId>kr.motd.maven</groupId>
+      <artifactId>os-maven-plugin</artifactId>
+      <version>1.6.2</version>
+    </extension>
+  </extensions>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-enforcer-plugin</artifactId>
+      <version>3.0.0-M1</version>
+      <executions>
+        <execution>
+          <id>enforce-tools</id>
+          <goals>
+            <goal>enforce</goal>
+          </goals>
+          <configuration>
+            <rules>
+              <requireJavaVersion>
+                <!-- Enforce JDK 1.8+ for compilation. -->
+                <!-- This is needed because of java.util.zip.Deflater and NIO UDP multicast. -->
+                <version>[1.8.0,)</version>
+              </requireJavaVersion>
+              <requireMavenVersion>
+                <version>[3.1.1,)</version>
+              </requireMavenVersion>
+              <requireProperty>
+                <regexMessage>
+                    x86_64/AARCH64/PPCLE64/s390x_64 JDK must be used.
+                </regexMessage>
+                <property>os.detected.arch</property>
+                <regex>^(x86_64|aarch_64|ppcle_64|s390_64)$</regex>
+              </requireProperty>
+            </rules>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+<plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+  </plugins>
+</build>
+</project>
